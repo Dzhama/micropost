@@ -8,7 +8,7 @@
     "build": "webpack",
     "start": "webpack-dev-server --output-public-path=/build/"
   },
-  "author": "Brad Traversy",
+  "author": "Dzhama",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.0",
