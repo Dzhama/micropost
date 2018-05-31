@@ -14,6 +14,11 @@ Install the dependencies
 ```sh
 $ npm install
 ```
+### Run JSON SERVER
+Create a local json db
+```sh
+$ npm run json:server
+```
 
 ### Serve
 To serve in the browser  - Runs webpack-dev-server
