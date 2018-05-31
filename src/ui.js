@@ -8,6 +8,7 @@ class UI {
         this.forState = 'add';
     }
 
+    //Show posts 
     showPosts(posts) {
         let output = '';
 
@@ -32,8 +33,11 @@ class UI {
 
         this.post.innerHTML = output;
     }
-    
+
+    //Show alert if post added
     showAlert(message, className) {
+        //clear alert if it's one already there
+        this.clearAlert();
         //Create div
         const div = document.createElement('div');
         //Add classes
@@ -53,6 +57,7 @@ class UI {
         }, 2000);
     }
 
+    //Clear Alert 
     clearAlert() {
         const currentAlert = document.querySelector('.alert');
 
@@ -61,13 +66,70 @@ class UI {
         }
     }
 
+    // Clear input Fields
     clearFields() {
         this.titleInput.value = "";
-        this.bodyInput.value = " ";
+        this.bodyInput.value = "";
+    }
+
+    //Clear hidden ID field
+    ClearIdInput() {
+        this.idInput.value = "";
+        console.log(this.id)
+    }
+
+    // Fill the input form for edit
+    fillForm(data) {
+        this.titleInput.value = data.title;
+        this.bodyInput.value = data.body;
+        this.idInput.value = data.id;
+
+        this.changeFormState('edit');
+    }
+
+    //Change the form state
+    changeFormState(type){
+        if(type === 'edit'){
+            //Change the button Value and color
+            this.postSubmit.textContent = "Update Post";
+            this.postSubmit.className = "post-submit btn btn-warning btn-block";
+
+            if(document.querySelector('.post-cancel') === null) {
+                //Create cancel button
+                const button = document.createElement('button');
+                //Add classes 
+                button.className = "post-cancel btn btn-danger btn-block mt-2";
+                //Add button Text
+                button.textContent = "Cancel Edit";
+
+                //Get parent
+                const cardForm = document.querySelector('.card-form');
+                //Get the element to insert before
+                const formEnd = document.querySelector('form-end');
+                //Insert cancel button
+                cardForm.insertBefore(button, formEnd);
+
+            }
+           
+        } else {
+            
+            //Change the button Value and color
+            this.postSubmit.textContent = "Post It";
+            this.postSubmit.className = "post-submit btn btn-primary btn-block";
+
+            //Remove cancel button if it is there
+            if (document.querySelector('.post-cancel')){
+                (document.querySelector('.post-cancel')).remove()
+                }
+            //Clear ID from hidden field
+            this.ClearIdInput();
+            //Clear the field
+            this.clearFields();
+            
+            
+        }
     }
  
 }
-
-
 
 export const ui = new UI();
